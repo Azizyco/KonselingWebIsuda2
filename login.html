@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masuk - Portal Konseling & Materi</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="icon" href="/assets/img/logo.svg" type="image/svg+xml">
+</head>
+<body class="auth-page">
+    <div id="toast-container"></div>
+    <main class="container">
+        <div class="auth-card">
+            <a href="/" class="logo">
+                <img src="/assets/img/logo.svg" alt="Logo Portal">
+                <h2>Masuk ke Akun Anda</h2>
+            </a>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Alamat Email</label>
+                    <input type="email" id="email" name="email" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Kata Sandi</label>
+                    <input type="password" id="password" name="password" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn btn-primary" id="login-btn">Masuk</button>
+            </form>
+            <div class="auth-links">
+                <a href="#" id="forgot-password-link">Lupa kata sandi?</a>
+                <p>Belum punya akun? <a href="/register.html">Daftar di sini</a></p>
+                <p><a href="/admin/admin-login.html">Masuk sebagai Staf</a></p>
+            </div>
+        </div>
+    </main>
+    <script type="module" src="/js/auth-pages.js"></script>
+</body>
+</html>

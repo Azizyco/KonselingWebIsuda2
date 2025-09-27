@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pantau Akun Admin</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="icon" href="/assets/img/logo.svg" type="image/svg+xml">
+</head>
+<body class="admin-body">
+    <div id="toast-container"></div>
+    <aside class="admin-sidebar">
+        <div class="logo">
+            <img src="/assets/img/logo.svg" alt="Logo">
+            <span class="user"><div id="admin-user"></div></span>
+        </div>
+        <nav>
+            <a href="/admin/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> Dashboard</a>
+            <a href="/admin/materi.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg> Materi</a>
+            <a href="/admin/artikel.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg> Artikel</a>
+            <a href="/admin/info.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg> Informasi</a>
+            <a href="/admin/accounts.html" class="active"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> Pantau Akun</a>
+            <a href="/admin/settings.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l-.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg> Pengaturan</a>
+        </nav>
+        <div class="sidebar-footer">
+            <button id="logout-btn" class="btn btn-danger">Keluar</button>
+        </div>
+    </aside>
+    <main class="admin-main">
+        <header class="admin-header">
+            <h1>Pantau Akun</h1>
+            <div id="admin-user"></div>
+        </header>
+
+        <div class="kpi-grid">
+            <div class="card kpi-card">
+                <h4>Total Akun</h4>
+                <p id="kpi-total-accounts" class="kpi-value">...</p>
+            </div>
+            <div class="card kpi-card">
+                <h4>Akun Siswa</h4>
+                <p id="kpi-student-accounts" class="kpi-value">...</p>
+            </div>
+            <div class="card kpi-card">
+                <h4>Akun Staf</h4>
+                <p id="kpi-staff-accounts" class="kpi-value">...</p>
+            </div>
+        </div>
+
+        <div class="admin-filters card">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Cari nama atau email...">
+                <button id="search-btn" class="btn">Cari</button>
+            </div>
+            <select id="role-filter">
+                <option value="all">Semua Peran</option>
+                <option value="siswa">Siswa</option>
+                <option value="guru">Guru</option>
+                <option value="admin">Admin</option>
+            </select>
+            <select id="sort-select">
+                <option value="created_at_desc">Terbaru</option>
+                <option value="name_asc">Nama (A-Z)</option>
+                <option value="name_desc">Nama (Z-A)</option>
+                <option value="role_asc">Peran (A-Z)</option>
+            </select>
+        </div>
+        
+        <div class="table-container card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>Peran</th>
+                        <th>Terdaftar</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="accounts-table-body">
+                    <!-- Data diisi oleh JS -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="admin-pagination" id="pagination-controls">
+            <!-- Pagination buttons diisi oleh JS -->
+        </div>
+    </main>
+
+    <div id="account-detail-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <h3>Detail Akun</h3>
+            <form id="account-detail-form">
+                <input type="hidden" id="detail-account-id">
+                <div class="form-group">
+                    <label for="detail-name">Nama Lengkap</label>
+                    <input type="text" id="detail-name" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="detail-email">Email</label>
+                    <input type="email" id="detail-email" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="detail-phone">Nomor Telepon</label>
+                    <input type="tel" id="detail-phone" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="detail-address">Alamat</label>
+                    <textarea id="detail-address" rows="3" disabled></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="detail-role">Peran</label>
+                    <select id="detail-role">
+                        <option value="siswa">Siswa</option>
+                        <option value="guru">Guru</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="form-group form-group-inline">
+                    <label for="detail-notify-email">Notifikasi Email</label>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="detail-notify-email" class="toggle-switch-checkbox" disabled>
+                        <label class="toggle-switch-label" for="detail-notify-email">
+                            <span class="toggle-switch-inner"></span>
+                            <span class="toggle-switch-switch"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="update-role-btn" class="btn btn-primary">Update Peran</button>
+                    <button type="button" id="delete-account-btn" class="btn btn-danger">Hapus Akun</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="/js/admin/admin-accounts.js"></script>
+</body>
+</html>

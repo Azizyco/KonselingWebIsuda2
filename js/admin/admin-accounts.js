@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Event Listeners for modal actions
     document.getElementById('update-role-btn').addEventListener('click', handleUpdateRole);
     document.getElementById('delete-account-btn').addEventListener('click', handleDeleteAccount);
+    
 });
 
 async function loadKPIs() {
@@ -212,24 +213,16 @@ async function handleDeleteAccount() {
   const accountId = document.getElementById('detail-account-id').value;
   const accountEmail = document.getElementById('detail-email').value;
 
-  const confirmed = await confirmDialog(`Apakah Anda yakin ingin menghapus akun "${accountEmail}"? Tindakan ini tidak dapat dibatalkan.`);
-  if (!confirmed) return;
+  const ok = await confirmDialog(`Hapus akun "${accountEmail}"? Tindakan ini tidak dapat dibatalkan.`);
+  if (!ok) return;
 
-  const { data: { session } } = await supabase.auth.getSession();
-  if (!session) { toast('Sesi kedaluwarsa. Silakan login ulang.', 'error'); return; }
-
-  const resp = await fetch('/functions/v1/delete-user', {
-    method: 'POST',
-    headers: { 
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${session.access_token}`
-    },
-    body: JSON.stringify({ userId: accountId })
+  // Panggil Edge Function yang baru kamu deploy
+  const { data, error } = await supabase.functions.invoke('delete-user', {
+    body: { userId: accountId }
   });
 
-  const json = await resp.json();
-  if (!resp.ok || !json.ok) {
-    toast(`Gagal menghapus pengguna: ${json.error || resp.statusText}`, 'error');
+  if (error || !data?.ok) {
+    toast(`Gagal menghapus: ${data?.error || error?.message}`, 'error');
     return;
   }
 
@@ -238,6 +231,7 @@ async function handleDeleteAccount() {
   loadAccounts(true);
   loadKPIs();
 }
+
 
 
 function applySorting(query, sortValue) {

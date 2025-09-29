@@ -181,7 +181,7 @@ async function handleViewDetail(event) {
     document.getElementById('detail-phone').value = profile.phone || '';
     document.getElementById('detail-address').value = profile.address || '';
     document.getElementById('detail-role').value = profile.role;
-    document.getElementById('detail-notify-email').checked = profile.notify_email;
+
 
     showModal('account-detail-modal');
 }

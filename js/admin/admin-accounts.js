@@ -209,29 +209,36 @@ async function handleUpdateRole() {
 }
 
 async function handleDeleteAccount() {
-    const accountId = document.getElementById('detail-account-id').value;
-    const accountEmail = document.getElementById('detail-email').value;
+  const accountId = document.getElementById('detail-account-id').value;
+  const accountEmail = document.getElementById('detail-email').value;
 
-    const confirmed = await confirmDialog(`Apakah Anda yakin ingin menghapus akun "${accountEmail}"? Tindakan ini tidak dapat dibatalkan.`);
-    if (!confirmed) return;
+  const confirmed = await confirmDialog(`Apakah Anda yakin ingin menghapus akun "${accountEmail}"? Tindakan ini tidak dapat dibatalkan.`);
+  if (!confirmed) return;
 
-    // First, delete the user from Supabase Auth
-    const { error: authError } = await supabase.auth.admin.deleteUser(accountId);
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) { toast('Sesi kedaluwarsa. Silakan login ulang.', 'error'); return; }
 
-    if (authError) {
-        toast(`Gagal menghapus pengguna dari Auth: ${authError.message}`, 'error');
-        return;
-    }
+  const resp = await fetch('/functions/v1/delete-user', {
+    method: 'POST',
+    headers: { 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${session.access_token}`
+    },
+    body: JSON.stringify({ userId: accountId })
+  });
 
-    // The profile in the 'profiles' table should be automatically deleted via RLS or a database trigger
-    // if configured correctly. If not, you might need to explicitly delete it here.
-    // For now, we assume RLS/trigger handles it.
+  const json = await resp.json();
+  if (!resp.ok || !json.ok) {
+    toast(`Gagal menghapus pengguna: ${json.error || resp.statusText}`, 'error');
+    return;
+  }
 
-    toast('Akun berhasil dihapus.', 'success');
-    hideModal('account-detail-modal');
-    loadAccounts(true); // Reload from first page
-    loadKPIs(); // Update KPIs
+  toast('Akun berhasil dihapus.', 'success');
+  hideModal('account-detail-modal');
+  loadAccounts(true);
+  loadKPIs();
 }
+
 
 function applySorting(query, sortValue) {
   // dukung: created_at_asc|created_at_desc|name_asc|name_desc

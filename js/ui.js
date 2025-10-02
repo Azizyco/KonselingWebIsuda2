@@ -1,6 +1,6 @@
 export function toast(message, type = 'info') {
     const toast = document.createElement('div');
-    toast.className = `toast toast-${type}`;
+    toast.className = `toast ${type}`;
     toast.textContent = message;
     
     const container = document.getElementById('toast-container');

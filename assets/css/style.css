@@ -9,7 +9,7 @@
     --card-bg: #F8FAFC;
     --body-bg: #F1F5F9;
     --border-color: #E5E7EB;
-    --success: #10b981;
+    --success: #02cf8b;
     --error: #ef4444;
     --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -426,7 +426,6 @@ textarea { resize: vertical; }
     position: fixed;
     top: 20px;
     right: 20px;
-    color: var(--orange);
     z-index: 1000;
     display: flex;
     flex-direction: column;

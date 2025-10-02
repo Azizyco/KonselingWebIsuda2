@@ -24,15 +24,12 @@ export async function getUserProfile(userId) {
     return data;
 }
 
-export async function signUp(name, email, password, phone, address) {
+export async function signUp(email, password) {
     const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
             data: {
-                name,
-                phone,
-                address,
                 role: 'siswa',
                 notify_email: false
             }
@@ -44,6 +41,22 @@ export async function signUp(name, email, password, phone, address) {
     }
     toast('Pendaftaran berhasil! Silakan cek email Anda untuk verifikasi.', 'success');
     return data.user;
+}
+
+export async function updateUserProfile(userId, profileData) {
+    if (!userId) return { error: { message: 'User ID tidak valid' } };
+    
+    const { error } = await supabase
+        .from('profiles')
+        .update(profileData)
+        .eq('id', userId);
+    
+    if (error) {
+        toast(error.message, 'error');
+        return { error };
+    }
+    
+    return { error: null };
 }
 
 export async function signIn(email, password) {

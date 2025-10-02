@@ -50,8 +50,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const phone = formData.get('phone');
             const address = formData.get('address');
             
-            await signUp(name, email, password, phone, address);
+            const user = await signUp(name, email, password, phone, address);
             registerForm.reset();
+            
+            // Redirect ke halaman login setelah register berhasil
+            if (user) {
+                setTimeout(() => {
+                    window.location.href = '/login.html';
+                }, 1500); // Delay 1.5 detik agar user bisa membaca pesan sukses
+            }
         });
     }
 

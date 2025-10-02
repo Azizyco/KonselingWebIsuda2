@@ -434,7 +434,7 @@ textarea { resize: vertical; }
 .toast {
     padding: 1rem 1.5rem;
     border-radius: var(--radius-sm);
-    color: var(--white);
+    color: var(--orange);
     box-shadow: var(--shadow-lg);
     opacity: 0;
     transform: translateX(100%);
